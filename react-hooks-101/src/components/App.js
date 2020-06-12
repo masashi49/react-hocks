@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import reducer from "../reducers";
+
 const App = () => {
+  const { state, dispatch } = useReducer( reducer, [] ) // useReducerの第一引数にはreducerの実態、第二引数には初期状態、第三は初期化時のみ発火する関数」
+
+  const addEvent = e => {
+    e.preventDefault() //buttonを押しても更新されない
+    //dispatchをよんで、action.typeとidとtitleを飛ばす必要がある
+  }
 
   return (
     <>
@@ -18,7 +26,7 @@ const App = () => {
           </div>
 
           <div className="mt-2">
-            <button className="btn btn-primary">イベントを作成</button>
+            <button className="btn btn-primary" onClick={ addEvent }>イベントを作成</button>
             <button className="btn btn-danger">全てのイベントを削除する</button>
           </div>
 
