@@ -1,15 +1,26 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import reducer from "../reducers";
 
 const App = () => {
-  const { state, dispatch } = useReducer( reducer, [] ) // useReducerの第一引数にはreducerの実態、第二引数には初期状態、第三は初期化時のみ発火する関数」
+  const [ state, dispatch ] = useReducer( reducer, [] ) // useReducerの第一引数にはreducerの実態、第二引数には初期状態、第三は初期化時のみ発火する関数」
+  const [ title, setTitle ] = useState( "" )
+  const [ body, setBody ] = useState( "" )
 
   const addEvent = e => {
     e.preventDefault() //buttonを押しても更新されない
     //dispatchをよんで、action.typeとidとtitleを飛ばす必要がある
+    dispatch( {
+      type: "CREATE_EVENT",
+      title,
+      body
+    } )
+
+    setTitle( '' )
+    setBody( '' )
   }
+  console.log( state )
 
   return (
     <>
@@ -18,11 +29,11 @@ const App = () => {
         <form action="">
           <div className="form -group">
             <label htmlFor="formEventTitle">タイトル</label>
-            <input className="form-control" type="text" id="formEventTitle" />
+            <input className="form-control" type="text" id="formEventTitle" value={ title } onChange={ e => setTitle( e.target.value ) } />
           </div>
           <div className="form -group">
             <label htmlFor="formEventBody">ボディー</label>
-            <textarea className="form-control" id="formEventTitle" />
+            <textarea className="form-control" id="formEventTitle" value={ body } onChange={ e => setBody( e.target.value ) } />
           </div>
 
           <div className="mt-2">
