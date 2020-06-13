@@ -1,6 +1,7 @@
 import React, { useReducer, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import Event from "./Event"
 import reducer from "../reducers";
 
 const App = () => {
@@ -20,7 +21,11 @@ const App = () => {
     setTitle( '' )
     setBody( '' )
   }
-  console.log( state )
+
+  const deleteAllEvent = e => {
+    e.preventDefault()
+    console.log( state )
+  }
 
   return (
     <>
@@ -38,9 +43,8 @@ const App = () => {
 
           <div className="mt-2">
             <button className="btn btn-primary" onClick={ addEvent }>イベントを作成</button>
-            <button className="btn btn-danger">全てのイベントを削除する</button>
+            <button className="btn btn-danger" onClick={ deleteAllEvent }>全てのイベントを削除する</button>
           </div>
-
 
           <table className="table table-hover mt-4">
             <thead>
@@ -51,11 +55,13 @@ const App = () => {
                 <th scope="col"></th>
               </tr>
             </thead>
+            <tbody>
+              { state.map( ( event, index ) => (
+                <Event key={ index } event={ event } dispatch={ dispatch } />
+              ) )
+              }
+            </tbody>
           </table>
-
-
-
-
         </form>
       </div>
     </>
