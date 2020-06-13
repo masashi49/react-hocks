@@ -22,10 +22,18 @@ const App = () => {
     setBody( '' )
   }
 
-  const deleteAllEvent = e => {
+  const deleteAllEvents = e => {
     e.preventDefault()
-    console.log( state )
+    const result = window.confirm( "全てのイベントを本当に削除してもいいですか？" );
+    
+    if ( result ) {
+      dispatch( {
+        type: "DELETE_ALL_EVENTS"
+      } )
+    }
   }
+
+  const unCreatble = title === "" || body === ""
 
   return (
     <>
@@ -42,8 +50,8 @@ const App = () => {
           </div>
 
           <div className="mt-2">
-            <button className="btn btn-primary" onClick={ addEvent }>イベントを作成</button>
-            <button className="btn btn-danger" onClick={ deleteAllEvent }>全てのイベントを削除する</button>
+            <button className="btn btn-primary" onClick={ addEvent } disabled={ unCreatble }>イベントを作成</button>
+            <button className="btn btn-danger" onClick={ deleteAllEvents } disabled={ state.length === 0 }>全てのイベントを削除する</button>
           </div>
 
           <table className="table table-hover mt-4">

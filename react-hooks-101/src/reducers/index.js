@@ -44,8 +44,9 @@ const events = ( state = [], action ) => {
                 event.id !== action.id    // deleteしたいidと一致しないものだけと取り出して返す
             );
 
-        case 'CREATE_ALL_EVENT':
+        case 'DELETE_ALL_EVENTS':
             return [] //これで空にできる
+
         default:
             return state
     }
