@@ -6,15 +6,18 @@ import Events from "./Events"
 import AppContext from "../contexts/AppContext"
 import reducer from "../reducers";
 
-console.log( AppContext )
+/** 
+ * providerで包まれているcomponentは、どれだけ深い所にあってもuseContextを使用してデータを共有できる
+ * prop Drilling問題(バケツリレー)をしないでよくなる。(不要な記述が消えて見通しがよくなる)
+ * **/
 
 const App = () => {
   const [ state, dispatch ] = useReducer( reducer, [] ) // useReducerの第一引数にはreducerの実態、第二引数には初期状態、第三は初期化時のみ発火する関数」
   return (
-    <AppContext.Provider value="hello i am a provieder">
+    <AppContext.Provider value={ { state, dispatch } }>
       <div className="container-fluid">
-        <EventForm state={ state } dispatch={ dispatch } />{/*stateをpropとして読ませることで、1つのstateを共有する。こうしないと別々のstateを定義してデータが反映されないというバグになる。*/ }
-        <Events state={ state } dispatch={ dispatch } />
+        <EventForm />{/*stateをpropとして読ませることで、1つのstateを共有する。こうしないと別々のstateを定義してデータが反映されないというバグになる。*/ }
+        <Events />
       </div>
     </AppContext.Provider>
   );
