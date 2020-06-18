@@ -3,5 +3,9 @@
 
 import { combineReducers } from "redux"
 import events from "./events"
+import operationLogs from "./operationLogs";
 
-export default combineReducers( { events } ) //オブジェクトの中にあるイベントというkey
+export default combineReducers( {
+    events,
+    operationLogs
+} ) //オブジェクトの中にあるイベントというkey
