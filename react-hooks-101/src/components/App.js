@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import EventForm from "./EventForm"
 import Events from "./Events"
+import OprationLogs from "./OperationLogs"
 import AppContext from "../contexts/AppContext"
 import reducer from "../reducers";
 
@@ -16,7 +17,7 @@ const App = () => {
   // 今までは空配列初期化していたけど、combineRecuserを導入してオブジェクトにする必要が出てきた。
   const initialState = {
     events: [],
-    operationLogs:[]
+    operationLogs: []
   }
 
   const [ state, dispatch ] = useReducer( reducer, initialState ) // useReducerの第一引数にはreducerの実態、第二引数には初期状態、第三は初期化時のみ発火する関数」
@@ -25,6 +26,7 @@ const App = () => {
       <div className="container-fluid">
         <EventForm />{/*stateをpropとして読ませることで、1つのstateを共有する。こうしないと別々のstateを定義してデータが反映されないというバグになる。*/ }
         <Events />
+        <OprationLogs />
       </div>
     </AppContext.Provider>
   );
