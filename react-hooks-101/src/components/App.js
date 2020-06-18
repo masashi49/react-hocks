@@ -12,7 +12,13 @@ import reducer from "../reducers";
  * **/
 
 const App = () => {
-  const [ state, dispatch ] = useReducer( reducer, [] ) // useReducerの第一引数にはreducerの実態、第二引数には初期状態、第三は初期化時のみ発火する関数」
+
+  // 今までは空配列初期化していたけど、combineRecuserを導入してオブジェクトにする必要が出てきた。
+  const initialState = {
+    events: []
+  }
+
+  const [ state, dispatch ] = useReducer( reducer, initialState ) // useReducerの第一引数にはreducerの実態、第二引数には初期状態、第三は初期化時のみ発火する関数」
   return (
     <AppContext.Provider value={ { state, dispatch } }>
       <div className="container-fluid">
