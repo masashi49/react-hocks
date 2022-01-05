@@ -1,6 +1,6 @@
 
 import React, { useState, useContext } from "react"
-
+import Button from "./Button"
 import {
     CREATE_EVENT,
     DELETE_ALL_EVENTS,
@@ -11,10 +11,13 @@ import {
 import AppContext from "../contexts/AppContext"
 import { timeCUrrentIOS8601 } from "../utils"
 
+
 const EventForm = () => {
     const { state, dispatch } = useContext( AppContext )
     const [ title, setTitle ] = useState( "" )
     const [ body, setBody ] = useState( "" )
+    const [ count, setCount ] = useState( 0 )
+    const [ score, setScore ] = useState(0)
     const addEvent = e => {
         e.preventDefault() //buttonを押しても更新されない
         //dispatchをよんで、action.typeとidとtitleを飛ばす必要がある
@@ -35,7 +38,7 @@ const EventForm = () => {
     }
 
     const deleteAllEvents = e => {
-        e.preventDefault()
+        e.preventDefault() 
         const result = window.confirm( "全てのイベントを本当に削除してもいいですか？" );
 
         if ( result ) {
@@ -59,10 +62,19 @@ const EventForm = () => {
         }
     }
 
+    const add = () => { 
+        return setCount(count + 1) 
+    }
+    const red = () => { 
+        return setScore(score - 1) 
+    }
+
     const unCreatble = title === "" || body === ""
     return (
         <>
             <h4>イベント作成フォーム</h4>
+            <Button handleClick={ add }>年齢 { count}</Button>
+            <Button handleClick={ red }>スコア{ score }</Button>
             <form action="">
                 <div className="form -group">
                     <label htmlFor="formEventTitle">タイトル</label>
@@ -83,4 +95,4 @@ const EventForm = () => {
     )
 }
 
-export default EventForm
+export default React.memo(EventForm)
